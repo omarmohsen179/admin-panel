@@ -23,11 +23,14 @@ namespace AdminPanelApi.Services
     public class AuthService : IAuthService
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
         private readonly IJwtService _jwtService;
         private readonly IMailService mailService;
-        public AuthService(UserManager<ApplicationUser> userManager, IJwtService jwtService, IOptions<MailSettings> mailSettings)
+        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IJwtService jwtService, IOptions<MailSettings> mailSettings)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _jwtService = jwtService;
         }
         public static string Base64Encode(string plainText)
@@ -50,7 +53,8 @@ namespace AdminPanelApi.Services
                 UserName = model.Email
             };
 
-
+            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
@@ -63,44 +67,47 @@ namespace AdminPanelApi.Services
                     Message = errors
                 };
             }
-            try {
+            await _userManager.AddToRoleAsync(user, "User");
+            if (model.url == null || model.url.Length == 0) {
+                try
+                {
 
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                await mailService.SendWelcomeEmailAsync(new MailRequest()
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    await mailService.SendWelcomeEmailAsync(new MailRequest()
+                    {
+                        ToEmail = model.Email,
+                        Subject = "Email Confirmation",
+                        path = model.url + "?username=" + user.UserName + "&token=" + Base64Encode(token),
+                        username = user.UserName,
+                        MainText = "you can confirm your email from this button"
+                    });
+                    return new valid
+                    {
+                        IsOk = true,
+                        Message = "success"
+                    };
+                }
+                catch (Exception ex)
                 {
-                    ToEmail = model.Email,
-                    Subject = "Email Confirmation",
-                    path = model.url + "?username=" + user.UserName + "&token=" + Base64Encode(token),
-                    username = user.UserName,
-                    MainText = "you can confirm your email from this button"
-                });
-                return new valid
-                {
-                    IsOk = true,
-                    Message = "success"
-                };
+                    return new valid
+                    {
+                        IsOk = false,
+                        Message = ex.ToString()
+                    };
+                }
+
             }
-            catch (Exception ex)
-            {
-                return new valid
-                {
-                    IsOk = false,
-                    Message = ex.ToString()
-                };
-            }
 
-            /* await _userManager.AddToRoleAsync(user, "User");
 
-             var jwtSecurityToken = await _jwtService.CreateJwtToken(user);
+
+
+         //    var jwtSecurityToken = await _jwtService.CreateJwtToken(user);
 
              return new()
              {
-                 Email = user.Email,
-                 ExpiresOn = jwtSecurityToken.ValidTo,
-                 IsAuthenticated = true,
-                 Role = "User",
-                 Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken)
-             };*/
+                 IsOk = true,
+                 Message = "success"
+             };
         }
         public async Task<valid> ForgetPassword( ForgetPasswordFormForgetPasswordForm model,string URL)
         {

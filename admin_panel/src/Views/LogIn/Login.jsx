@@ -1,14 +1,15 @@
 import { useCallback, useState } from "react";
-import REQUEST from "../../Services/Request";
+import { LOGIN } from "./Login.Api";
+
 import "./Login.css";
 function Login() {
   let [values, setvalues] = useState({ Email: "", Password: "" });
   let HandleChange = useCallback((e) => {
     setvalues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
-  let Submit = useCallback((e) => {
-    e.preventDefualt();
-    REQUEST();
+  let Submit = useCallback(async(e) => {
+    e.preventDefault();
+    LOGIN(values)
   }, []);
   return (
     <div class="main">
@@ -34,10 +35,11 @@ function Login() {
           onChange={HandleChange}
           placeholder="Password"
         />
-      </form>
+
       <button class="submit" type={"submit"} align="center">
         Sign in
       </button>
+      </form>
       <p class="forgot" align="center">
         <a href="#">Forgot Password?</a>
       </p>

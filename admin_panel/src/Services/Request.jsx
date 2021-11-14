@@ -4,7 +4,13 @@ import { ErpApiBaseUrl } from './config.json'
  * Create an Axios Client with defaults
  */
 export const client = axios.create({
-    baseURL: ErpApiBaseUrl
+    baseURL: "https://localhost:44318/api",
+    headers:{
+            ...axios.defaults.headers,
+            Authorization: `bearer ${JSON.parse(localStorage.getItem('user'))?.token}`,
+          }
+    
+
     // baseURL: "https://localhost:44351/api"
     // baseURL: "https://api.eg-sds.com/api"
     // baseURL: "https://api.lms.almedadsoft.com/api"
@@ -16,6 +22,7 @@ export const client = axios.create({
  * Request Wrapper with default success/error actions
  */
 const REQUEST = function (options) {
+    
     const onSuccess = function (response) {
         // console.debug('Request Successful!', response);
         return response;
