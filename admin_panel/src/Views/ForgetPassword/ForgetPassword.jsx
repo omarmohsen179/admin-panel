@@ -3,11 +3,10 @@ import { useHistory } from "react-router";
 import { LOGIN } from "./Login.Api";
 
 import "./Login.css";
-function Login() {
+function ForgetPassword() {
   let history =useHistory()
-  let [values, setvalues] = useState({ email: "", password: "" });
+  let [values, setvalues] = useState({ email: "" });
   let HandleChange = useCallback((e) => {
-    console.log(e)
     setvalues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
   let Submit = useCallback(async(e) => {
@@ -22,7 +21,7 @@ function Login() {
     return (
     <div class="main">
       <p class="sign" align="center">
-        Sign in
+       Forget Password 
       </p>
       <form class="form1" onSubmit={Submit}>
         <input
@@ -34,25 +33,16 @@ function Login() {
           value={values.email}
           placeholder="E-mail"
         />
-        <input
-          type="password"
-          align="center"
-          name="password"
-          className="un"
-          value={values.password}
-          onChange={HandleChange}
-          placeholder="Password"
-        />
 
       <button class="submit" type={"submit"} align="center">
-        Sign in
+        Submit
       </button>
       </form>
       <p class="forgot" align="center">
-        <a href="#">Forgot Password?</a>
+        <a href="/log-in" >Sign In </a>
       </p>
     </div>
   );
 }
 
-export default Login;
+export default ForgetPassword;

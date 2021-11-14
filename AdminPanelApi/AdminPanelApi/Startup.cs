@@ -37,7 +37,7 @@ namespace AdminPanelApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.Configure<JWT>(Configuration.GetSection("JWT"));
+            services.Configure<JWT>(Configuration.GetSection("JWT2"));
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
