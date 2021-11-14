@@ -15,7 +15,7 @@ namespace AdminPanelApi.DTOs
 
         [Required]
         public string Password { get; set; }
-        [Required]
+
         public string url { get; set; }
     }
 }
