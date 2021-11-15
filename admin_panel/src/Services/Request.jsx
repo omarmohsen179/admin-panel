@@ -4,7 +4,7 @@ import { ErpApiBaseUrl } from './config.json'
  * Create an Axios Client with defaults
  */
 export const client = axios.create({
-    baseURL: "https://localhost:44318/api",
+    baseURL: ErpApiBaseUrl+"/api/",
     headers:{
             ...axios.defaults.headers,
             Authorization: `bearer ${JSON.parse(localStorage.getItem('user'))?.token}`,

@@ -28,7 +28,7 @@ const SideBar = (props) => {
                   var element =
                     document.getElementsByClassName("list-slid-bar");
                   for (var i = 0; i < element.length; i++) {
-                    if (i == key) {
+                    if (i === key) {
                       if (!element[i].classList.contains("active")) {
                         element[i].classList.add("active");
                       }

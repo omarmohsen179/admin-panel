@@ -1,24 +1,23 @@
 import { useCallback, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory ,Link} from "react-router-dom";
 import { LOGIN } from "./Login.Api";
 
 import "./Login.css";
-function Login() {
+function Login(props) {
   let history =useHistory()
   let [values, setvalues] = useState({ email: "", password: "" });
   let HandleChange = useCallback((e) => {
-    console.log(e)
     setvalues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
   let Submit = useCallback(async(e) => {
     e.preventDefault();
     LOGIN(values).then((res ) =>{
       localStorage.setItem("user", JSON.stringify(res))
-      history.push('/log-in')
+      history.push('/')
     }).catch((err)=>{
 
     })
-  }, [values]);
+  }, [values,history]);
     return (
     <div class="main">
       <p class="sign" align="center">
@@ -27,9 +26,10 @@ function Login() {
       <form class="form1" onSubmit={Submit}>
         <input
           class="un "
-          type="text"
+          type="email"
           align="center"
           name={"email"}
+          autoComplete={false}
           onChange={HandleChange}
           value={values.email}
           placeholder="E-mail"
@@ -39,6 +39,7 @@ function Login() {
           align="center"
           name="password"
           className="un"
+          autoComplete={false}
           value={values.password}
           onChange={HandleChange}
           placeholder="Password"
@@ -49,7 +50,7 @@ function Login() {
       </button>
       </form>
       <p class="forgot" align="center">
-        <a href="#">Forgot Password?</a>
+        <Link to="/forget-password" >Forgot Password?</Link>
       </p>
     </div>
   );

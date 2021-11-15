@@ -71,5 +71,19 @@ namespace AdminPanelApi.Controllers
 
             return Ok(result);
         }
+        [HttpPost("forget-passworx")]
+        public async Task<IActionResult> ForgetPassword([FromBody] ForgetPasswordFormForgetPasswordForm model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _authService.ForgetPassword(model,"");
+
+            if (!result.IsOk)
+                return BadRequest(result.Message);
+
+            return Ok(result);
+        }
+
     }
 }

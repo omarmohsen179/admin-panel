@@ -4,11 +4,8 @@ import React from "react";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { routes } from "./Routes";
 import Navbar from "../Components/Navbar/Navbar";
-import axios from "axios";
-import { ErpApiBaseUrl } from "../Services/config.json";
-
 import SideBar from "../Components/SlideBar/Sidebar";
-import REQUEST from "../Services/Request";
+import { CHECK_ADMIN } from "./Layout.Api";
 
 const Layout = (props) => {
   let history = useHistory();
@@ -23,22 +20,15 @@ const Layout = (props) => {
   const item = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : {};
-  console.log(item);
   if (!item?.type || item.type[0] !== "Admin") {
-    //   history.push("/log-in");
+   //history.push("/log-in");
   } else {
-    REQUEST()
+    CHECK_ADMIN()
       .then((res) => console.log("success"))
       .catch((err) => {
-        //   history.push("/log-in");
+      //   history.push("/log-in");
         localStorage.removeItem("user");
       });
-    axios.get(ErpApiBaseUrl + "/api/check-admin", {
-      headers: {
-        ...axios.defaults.headers,
-        Authorization: `bearer ${item.token}`,
-      },
-    });
   }
 
   return (

@@ -1,8 +1,7 @@
 import { useCallback, useState } from "react";
-import { useHistory } from "react-router";
-import { LOGIN } from "./Login.Api";
+import { useHistory ,Link} from "react-router-dom";
+import { FORGET_PASSWORD } from "./ForgetPassword.Api";
 
-import "./Login.css";
 function ForgetPassword() {
   let history =useHistory()
   let [values, setvalues] = useState({ email: "" });
@@ -11,13 +10,13 @@ function ForgetPassword() {
   }, []);
   let Submit = useCallback(async(e) => {
     e.preventDefault();
-    LOGIN(values).then((res ) =>{
+    FORGET_PASSWORD(values).then((res ) =>{
       localStorage.setItem("user", JSON.stringify(res))
       history.push('/log-in')
     }).catch((err)=>{
 
     })
-  }, [values]);
+  }, [values,history]);
     return (
     <div class="main">
       <p class="sign" align="center">
@@ -39,7 +38,8 @@ function ForgetPassword() {
       </button>
       </form>
       <p class="forgot" align="center">
-        <a href="/log-in" >Sign In </a>
+      <Link to="/log-in" >Sign In</Link>
+    
       </p>
     </div>
   );
