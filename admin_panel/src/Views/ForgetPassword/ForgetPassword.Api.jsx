@@ -1,9 +1,9 @@
 import REQUEST from "../../Services/Request";
 
-export const LOGIN=async (e) =>{
+export const FORGET_PASSWORD=async (e) =>{
 
     return await REQUEST({
-        url:"Auth/login",
+        url:"Auth/forget-password",
         method:"POST",
         data:e});
 }

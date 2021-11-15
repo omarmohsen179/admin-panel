@@ -1,5 +1,7 @@
 function Home() {
-  return <div className="App"></div>;
+  return (    <div
+    className="content"
+  ></div>);
 }
 
 export default Home;
