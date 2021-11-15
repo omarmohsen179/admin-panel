@@ -11,10 +11,7 @@ import {
 } from "reactstrap";
 import { routes } from "../../Layout/Routes";
 
-
-
-
-const Header= (props) => {
+const Header = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [color, setColor] = React.useState("transparent");
   const sidebarToggle = React.useRef(null);
@@ -103,10 +100,16 @@ const Header= (props) => {
         <Collapse isOpen={isOpen} navbar className="justify-content-end">
           <Nav navbar>
             <NavItem>
-              <Link to="/admin" className="nav-link btn-rotate">
-                <i className="fas fa-cogs" />
+              <Link
+                to="/log-in"
+                onClick={() => {
+                  localStorage.removeItem("user");
+                }}
+                className="nav-link btn-rotate"
+              >
+                <i className="fas fa-sign-out-alt" />
                 <p>
-                  <span className="d-lg-none d-md-block">Account</span>
+                  <span className="d-lg-none d-md-block">Log Out</span>
                 </p>
               </Link>
             </NavItem>

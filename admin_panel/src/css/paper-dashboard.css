@@ -4,6 +4,9 @@ Licensed under the MIT license - http://opensource.org/licenses/MIT
 
 Copyright (c) 2015 Daniel Eden
 */
+.list-slid-bar .active {
+  color: white !important;
+}
 .slidebar-title {
   text-align: center;
   color: white;
@@ -4804,7 +4807,7 @@ License - nucleoapp.com/license/
   line-height: 30px;
   width: 34px;
   text-align: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 255) !important;
   position: relative;
 }
 

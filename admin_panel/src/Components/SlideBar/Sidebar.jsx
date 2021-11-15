@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import { Nav } from "reactstrap";
 
 const SideBar = (props) => {
   const sidebar = React.useRef(null);
+
+  const activeRouteFUnction = useCallback((routeName, classname) => {
+    if (props.location.pathname === "/") {
+      return routeName === props.location.pathname
+        ? classname + " active"
+        : classname;
+    }
+    return props.location.pathname.indexOf(routeName) > -1 && routeName !== "/"
+      ? classname + " active"
+      : classname;
+  }, []);
   // verifies if routeName is the one active (in browser input)
   return (
     <div
@@ -15,7 +26,6 @@ const SideBar = (props) => {
         <a href="/" className="logo-normal slidebar-title">
           <i className="fas fa-user"></i>
         </a>
-        {"my username"}
       </div>
       <div className="sidebar-wrapper" ref={sidebar}>
         <Nav>
@@ -23,7 +33,7 @@ const SideBar = (props) => {
             return (
               <li
                 key={key}
-                className={"list-slid-bar "}
+                className={activeRouteFUnction(prop.path, "list-slid-bar")}
                 onClick={() => {
                   var element =
                     document.getElementsByClassName("list-slid-bar");
@@ -43,7 +53,7 @@ const SideBar = (props) => {
                 <NavLink
                   exact
                   to={prop.layout + prop.path}
-                  className="nav-link"
+                  className={activeRouteFUnction(prop.path, "nav-link")}
                   activeClassName="active"
                 >
                   <i className={prop.icon} />

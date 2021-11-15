@@ -20,13 +20,13 @@ const Layout = (props) => {
   const item = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : {};
-  if (!item?.type || item.type[0] !== "Admin") {
-   //history.push("/log-in");
+  if (!item.token) {
+    history.push("/log-in");
   } else {
     CHECK_ADMIN()
-      .then((res) => console.log("success"))
+      .then((res) => {})
       .catch((err) => {
-      //   history.push("/log-in");
+        history.push("/log-in");
         localStorage.removeItem("user");
       });
   }
@@ -44,6 +44,7 @@ const Layout = (props) => {
 
         <Switch>
           {routes.map((prop, key) => {
+            // prop.name != 'Logout' ?
             return (
               <Route
                 path={prop.layout + prop.path}

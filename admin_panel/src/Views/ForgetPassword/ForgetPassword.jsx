@@ -1,26 +1,29 @@
 import { useCallback, useState } from "react";
-import { useHistory ,Link} from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { FORGET_PASSWORD } from "./ForgetPassword.Api";
 
 function ForgetPassword() {
-  let history =useHistory()
+  let history = useHistory();
   let [values, setvalues] = useState({ email: "" });
   let HandleChange = useCallback((e) => {
     setvalues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
-  let Submit = useCallback(async(e) => {
-    e.preventDefault();
-    FORGET_PASSWORD(values).then((res ) =>{
-      localStorage.setItem("user", JSON.stringify(res))
-      history.push('/log-in')
-    }).catch((err)=>{
-
-    })
-  }, [values,history]);
-    return (
+  let Submit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      FORGET_PASSWORD(values)
+        .then((res) => {
+          localStorage.setItem("user", JSON.stringify(res));
+          history.push("/log-in");
+        })
+        .catch((err) => {});
+    },
+    [values, history]
+  );
+  return (
     <div class="main">
       <p class="sign" align="center">
-       Forget Password 
+        Forget Password
       </p>
       <form class="form1" onSubmit={Submit}>
         <input
@@ -33,13 +36,14 @@ function ForgetPassword() {
           placeholder="E-mail"
         />
 
-      <button class="submit" type={"submit"} align="center">
-        Submit
-      </button>
+        <button class="submit" type={"submit"} align="center">
+          Submit
+        </button>
       </form>
       <p class="forgot" align="center">
-      <Link to="/log-in" >Sign In</Link>
-    
+        <Link to="/log-in" className="label-shared-style">
+          Sign In
+        </Link>
       </p>
     </div>
   );

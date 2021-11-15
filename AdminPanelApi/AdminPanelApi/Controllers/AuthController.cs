@@ -84,6 +84,11 @@ namespace AdminPanelApi.Controllers
 
             return Ok(result);
         }
-
+        [HttpPost("check-user")]
+        [Authorize]
+        public async Task<IActionResult> CheckUser()
+        {
+            return Ok(200);
+        }
     }
 }

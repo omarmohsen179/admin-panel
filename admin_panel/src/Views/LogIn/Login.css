@@ -34,6 +34,12 @@
   margin-bottom: 27px;
   font-family: "Ubuntu", sans-serif;
 }
+.login-remeber-me-checkbox {
+  margin-left: 46px !important;
+}
+.login-remeber-me-checkbox label {
+  padding: 5px;
+}
 
 form.form1 {
   padding-top: 40px;

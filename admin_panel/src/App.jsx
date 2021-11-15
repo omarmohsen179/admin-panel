@@ -1,7 +1,7 @@
 import "font-awesome/css/font-awesome.min.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
-import "../node_modules/popper.js/dist/popper";
+import "bootstrap/dist/js/bootstrap.bundle";
+import "popper.js/dist/popper";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Route, Switch } from "react-router-dom";

@@ -1,24 +1,38 @@
-import { useCallback, useState } from "react";
-import { useHistory ,Link} from "react-router-dom";
+import { useCallback, useState, useEffect } from "react";
+import { useHistory, Link } from "react-router-dom";
 import { LOGIN } from "./Login.Api";
 
 import "./Login.css";
 function Login(props) {
-  let history =useHistory()
-  let [values, setvalues] = useState({ email: "", password: "" });
+  let history = useHistory();
+
+  let [values, setvalues] = useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      history.push("/");
+    }
+  }, []);
+
   let HandleChange = useCallback((e) => {
     setvalues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
-  let Submit = useCallback(async(e) => {
-    e.preventDefault();
-    LOGIN(values).then((res ) =>{
-      localStorage.setItem("user", JSON.stringify(res))
-      history.push('/')
-    }).catch((err)=>{
-
-    })
-  }, [values,history]);
-    return (
+  let Submit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      LOGIN(values)
+        .then((res) => {
+          localStorage.setItem("user", JSON.stringify(res));
+          history.push("/");
+        })
+        .catch((err) => {});
+    },
+    [values, history]
+  );
+  return (
     <div class="main">
       <p class="sign" align="center">
         Sign in
@@ -45,12 +59,24 @@ function Login(props) {
           placeholder="Password"
         />
 
-      <button class="submit" type={"submit"} align="center">
-        Sign in
-      </button>
+        <div className="login-remeber-me-checkbox">
+          <input
+            type="checkbox"
+            name="rememberMe"
+            value={values.rememberMe}
+            onChange={HandleChange}
+          />
+          <label className="label-shared-style"> Remember me</label>
+        </div>
+
+        <button class="submit" type={"submit"} align="center">
+          Sign in
+        </button>
       </form>
       <p class="forgot" align="center">
-        <Link to="/forget-password" >Forgot Password?</Link>
+        <Link to="/forget-password" className="label-shared-style">
+          Forgot Password?
+        </Link>
       </p>
     </div>
   );
