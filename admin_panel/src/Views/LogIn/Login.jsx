@@ -1,9 +1,12 @@
 import { useCallback, useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
-import { LOGIN } from "./Login.Api";
-
+import { useSelector, useDispatch } from "react-redux";
+import { userLogin, user_selector } from "../../Store/AuthReducer";
 import "./Login.css";
-function Login(props) {
+import axios from "axios";
+function Login() {
+  let dispatch = useDispatch();
+  let selector = useSelector(user_selector);
   let history = useHistory();
 
   let [values, setvalues] = useState({
@@ -12,7 +15,7 @@ function Login(props) {
     rememberMe: false,
   });
   useEffect(() => {
-    if (localStorage.getItem("user")) {
+    if (Object.keys(selector).length > 0) {
       history.push("/");
     }
   }, []);
@@ -23,12 +26,12 @@ function Login(props) {
   let Submit = useCallback(
     async (e) => {
       e.preventDefault();
-      LOGIN(values)
-        .then((res) => {
-          localStorage.setItem("user", JSON.stringify(res));
-          history.push("/");
-        })
-        .catch((err) => {});
+
+      let res = await userLogin(values);
+      if (res) {
+        await dispatch(res);
+        history.push("/");
+      }
     },
     [values, history]
   );
@@ -63,8 +66,10 @@ function Login(props) {
           <input
             type="checkbox"
             name="rememberMe"
+            onChange={(e) =>
+              setvalues({ ...values, rememberMe: e.target.checked })
+            }
             value={values.rememberMe}
-            onChange={HandleChange}
           />
           <label className="label-shared-style"> Remember me</label>
         </div>

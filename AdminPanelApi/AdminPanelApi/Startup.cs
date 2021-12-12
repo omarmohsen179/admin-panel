@@ -75,11 +75,12 @@ namespace AdminPanelApi
                     ValidateLifetime = true,
                 };
             });
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IJwtService, JwtService>();
-
-            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, MailService>();
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+         
 
 
             services.AddControllers();
@@ -94,7 +95,7 @@ namespace AdminPanelApi
                 options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
 
             services.AddCors(options =>
             {

@@ -1,35 +1,48 @@
 import React from "react";
 // javascript plugin used to create scrollbars on windows
-
+import { signOut, user_selector } from "../Store/AuthReducer";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { routes } from "./Routes";
 import Navbar from "../Components/Navbar/Navbar";
 import SideBar from "../Components/SlideBar/Sidebar";
 import { CHECK_ADMIN } from "./Layout.Api";
-
+import { useSelector, useDispatch } from "react-redux";
+import { RemoveFromLocalStorage } from "../Services/LocalStorageService";
+import axios from "axios";
 const Layout = (props) => {
   let history = useHistory();
+  let dispatch = useDispatch();
+  let selector = useSelector(user_selector);
   require("../css/paper-dashboard.css");
   const mainPanel = React.useRef(null);
   const location = useLocation();
 
-  React.useEffect(() => {
+  React.useEffect(async () => {
+    if (Object.keys(selector).length === 0) {
+      history.push("/log-in");
+    } else {
+      console.log(selector.token);
+      axios.defaults.headers.Authorization = `bearer ${selector.token}`;
+      await CHECK_ADMIN()
+        .then((res) => {})
+        .catch((err) => {
+          RemoveFromLocalStorage("user");
+          dispatch(signOut());
+          history.push("/log-in");
+        });
+    }
     mainPanel.current && (mainPanel.current.scrollTop = 0);
     document.scrollingElement && (document.scrollingElement.scrollTop = 0);
   }, [location]);
-  const item = localStorage.getItem("user")
+
+  /*const item = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : {};
   if (!item.token) {
-    history.push("/log-in");
+    
   } else {
-    CHECK_ADMIN()
-      .then((res) => {})
-      .catch((err) => {
-        history.push("/log-in");
-        localStorage.removeItem("user");
-      });
-  }
+
+  }*/
 
   return (
     <div className="wrapper">

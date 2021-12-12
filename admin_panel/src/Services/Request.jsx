@@ -1,15 +1,13 @@
 import axios from "axios";
-import { ErpApiBaseUrl } from "./config.json";
+import { useSelector } from "react-redux";
+import { user_selector } from "../Store/AuthReducer";
+import { ApiBaseUrl } from "./config.json";
 /**
  * Create an Axios Client with defaults
  */
-console.log(
-  localStorage.getItem("user")
-    ? `bearer ${JSON.parse(localStorage.getItem("user")).token}`
-    : ""
-);
+
 export const client = axios.create({
-  baseURL: ErpApiBaseUrl + "/api/",
+  baseURL: ApiBaseUrl + "/api/",
 
   // baseURL: "https://localhost:44351/api"
   // baseURL: "https://api.eg-sds.com/api"
@@ -22,12 +20,10 @@ export const client = axios.create({
  */
 const REQUEST = function (options) {
   const onSuccess = function (response) {
-    // console.debug('Request Successful!', response);
     return response.data;
   };
-
   const onError = function (error) {
-    // console.error('Request Failed:', error.config);
+    console.error("Request Failed:", error.config);
 
     if (error.response) {
       // Request was made but server responded with something
@@ -48,14 +44,11 @@ const REQUEST = function (options) {
 
     return Promise.reject(error);
   };
-  console.log(JSON.parse(localStorage.getItem("user")));
+
   return client({
     ...options,
     headers: {
       ...axios.defaults.headers,
-      Authorization: localStorage.getItem("user")
-        ? `bearer ${JSON.parse(localStorage.getItem("user")).token}`
-        : "",
     },
   })
     .then(onSuccess)

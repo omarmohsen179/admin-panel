@@ -3,11 +3,15 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { HashRouter } from "react-router-dom";
 import App from "./App";
+import { Provider } from "react-redux";
+import configureStore from "./Store/ConfigureStore";
 import { LanguageProvider } from "./Services/LangueContext";
 ReactDOM.render(
   <HashRouter>
     <LanguageProvider>
-      <App />
+      <Provider store={configureStore()}>
+        <App />
+      </Provider>
     </LanguageProvider>
   </HashRouter>,
   document.getElementById("root")

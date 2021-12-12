@@ -1,0 +1,22 @@
+.Home-steps-card {
+  padding: 20px;
+  display: flex;
+}
+.step-circle {
+  color: #f4ab3c;
+  border: solid #f4ab3c 2px;
+  text-align: center;
+  border-radius: 27px;
+  font-size: 20px;
+  font-family: "Font Awesome 5 Free";
+}
+
+.step-circle p {
+  padding: 6px 17px;
+  margin: auto;
+}
+.step-card-title {
+  font-weight: 600px;
+}
+.decs-card-title {
+}

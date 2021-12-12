@@ -14,10 +14,10 @@ namespace AdminPanelApi.Services
  
     public interface IAuthService
     {
-        Task<valid> RegisterAsync(RegisterModel model);
+        Task<valid> RegisterAsync(RegisterModel model, string userType);
         Task<valid> ConfirmEmail(emailconfirm model); 
         Task<valid> ForgetPassword(ForgetPasswordFormForgetPasswordForm model, string URL);
-
+        Task<valid> CheckUserType(string username);
     }
  
     public class AuthService : IAuthService
@@ -38,7 +38,7 @@ namespace AdminPanelApi.Services
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
             return System.Convert.ToBase64String(plainTextBytes);
         }
-        public async Task<valid> RegisterAsync(RegisterModel model)
+        public async Task<valid> RegisterAsync(RegisterModel model,string userType)
         {
             if (await _userManager.FindByEmailAsync(model.Email) is not null)
                 return new valid
@@ -50,13 +50,13 @@ namespace AdminPanelApi.Services
             var user = new ApplicationUser()
             {
                 Email = model.Email,
-                UserName = model.Email
+                UserName = model.Email,
+               
             };
 
-            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
-            var result = await _userManager.CreateAsync(user, model.Password);
 
+       
+             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
                 var errors = result.Errors.Aggregate(string.Empty, (current, error) => current + $"{error.Description}\n");
@@ -67,35 +67,40 @@ namespace AdminPanelApi.Services
                     Message = errors
                 };
             }
-            await _userManager.AddToRoleAsync(user, "User");
-            if (model.url == null || model.url.Length == 0) {
+            
+                if (model.url == null || model.url.Length == 0 && userType == UserRoles.User)
+                {
+                await _userManager.AddToRoleAsync(user, UserRoles.User);
                 try
-                {
+                    {
 
-                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    await mailService.SendWelcomeEmailAsync(new MailRequest()
+                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        await mailService.SendWelcomeEmailAsync(new MailRequest()
+                        {
+                            ToEmail = model.Email,
+                            Subject = "Email Confirmation",
+                            path = model.url + "?username=" + user.UserName + "&token=" + Base64Encode(token),
+                            username = user.UserName,
+                            MainText = "you can confirm your email from this button"
+                        });
+                        return new valid
+                        {
+                            IsOk = true,
+                            Message = "success"
+                        };
+                    }
+                    catch (Exception ex)
                     {
-                        ToEmail = model.Email,
-                        Subject = "Email Confirmation",
-                        path = model.url + "?username=" + user.UserName + "&token=" + Base64Encode(token),
-                        username = user.UserName,
-                        MainText = "you can confirm your email from this button"
-                    });
-                    return new valid
-                    {
-                        IsOk = true,
-                        Message = "success"
-                    };
+                        return new valid
+                        {
+                            IsOk = false,
+                            Message = ex.ToString()
+                        };
+                    }
                 }
-                catch (Exception ex)
-                {
-                    return new valid
-                    {
-                        IsOk = false,
-                        Message = ex.ToString()
-                    };
-                }
-
+            
+            else if (userType == UserRoles.Admin || userType == UserRoles.SuperAdmin) {
+                await _userManager.AddToRoleAsync(user, UserRoles.Admin);
             }
 
 
@@ -171,6 +176,20 @@ namespace AdminPanelApi.Services
                 IsOk = false,
                 Message = model.ToString()
             };
+        }
+
+        public async Task<valid> CheckUserType(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            List<string> roles = (List<string>)await _userManager.GetRolesAsync(user);
+            return new valid
+            {
+                IsOk = true,
+                Message = roles.ElementAt(0).ToString()
+            };
+          
+
+
         }
     }
     }

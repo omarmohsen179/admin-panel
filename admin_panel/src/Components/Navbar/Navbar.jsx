@@ -9,13 +9,17 @@ import {
   NavItem,
   Container,
 } from "reactstrap";
+import { signOut } from "../../Store/AuthReducer";
 import { routes } from "../../Layout/Routes";
-
+import { useDispatch, useSelector } from "react-redux";
+import { RemoveFromLocalStorage } from "../../Services/LocalStorageService";
 const Header = (props) => {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = React.useState(false);
   const [color, setColor] = React.useState("transparent");
   const sidebarToggle = React.useRef(null);
   const location = useLocation();
+
   const toggle = () => {
     if (isOpen) {
       setColor("transparent");
@@ -103,7 +107,8 @@ const Header = (props) => {
               <Link
                 to="/log-in"
                 onClick={() => {
-                  localStorage.removeItem("user");
+                  RemoveFromLocalStorage("user-auth");
+                  dispatch(signOut());
                 }}
                 className="nav-link btn-rotate"
               >

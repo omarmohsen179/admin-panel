@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2021-12-12T09:26:38.2257301Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2021-12-12T09:26:43.2177105Z"
+    }
+  },
+  "parameters": {
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "f6540eaf-ce2e-433e-8fb1-fdd26a9597e2"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "AdminPanelApi20211212111519ResourceGroup"
+    }
+  }
+}

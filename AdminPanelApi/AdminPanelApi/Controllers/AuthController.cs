@@ -36,7 +36,7 @@ namespace AdminPanelApi.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _authService.RegisterAsync(model);
+            var result = await _authService.RegisterAsync(model,userType:"user");
 
             if (!result.IsOk)
                 return BadRequest(result.Message);
@@ -57,7 +57,19 @@ namespace AdminPanelApi.Controllers
 
             return Ok(result);
         }
+        [HttpPost("register-admin")]
+        public async Task<IActionResult> RegisterAsyncAdmin([FromBody] RegisterModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
+            var result = await _authService.RegisterAsync(model,"Admin");
+
+            if (!result.IsOk)
+                return BadRequest(result.Message);
+
+            return Ok(result);
+        }
         [HttpPost("login")]
         public async Task<IActionResult> GetTokenAsync([FromBody] TokenRequestModel model)
         {
@@ -84,10 +96,11 @@ namespace AdminPanelApi.Controllers
 
             return Ok(result);
         }
-        [HttpPost("check-user")]
-        [Authorize]
-        public async Task<IActionResult> CheckUser()
+        [HttpGet("check-type")]
+        [Authorize (Roles =UserRoles.Admin)]
+        public async Task<IActionResult> UserType()
         {
+           
             return Ok(200);
         }
     }

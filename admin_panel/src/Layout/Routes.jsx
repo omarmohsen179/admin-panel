@@ -9,8 +9,15 @@ export const routes = [
     layout: "",
   },
   {
-    path: "/Home2",
-    name: "Home2",
+    path: "/About-us",
+    name: "About us",
+    icon: "fas fa-user-edit",
+    component: Home,
+    layout: "",
+  },
+  {
+    path: "/Footer",
+    name: "Footer",
     icon: "fas fa-home",
     component: Home,
     layout: "",

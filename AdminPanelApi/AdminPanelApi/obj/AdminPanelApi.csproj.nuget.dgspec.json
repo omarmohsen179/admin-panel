@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[2.15.0, )"
             },
+            "Microsoft.AspNet.WebApi.Core": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[5.0.0, )",
@@ -119,10 +123,6 @@
             "System.Drawing.Common": {
               "target": "Package",
               "version": "[5.0.2, )"
-            },
-            "jose-jwt": {
-              "target": "Package",
-              "version": "[3.2.0, )"
             }
           },
           "imports": [
