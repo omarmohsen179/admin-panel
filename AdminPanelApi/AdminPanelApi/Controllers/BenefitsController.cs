@@ -42,7 +42,8 @@ namespace AdminPanelApi.Controllers
             var objlist = this.unitOfWork.BenefitsManager.GetAll() ;
             if (objlist != null)
             {
-                return Ok(objlist);
+                string JSONresult = JsonConvert.SerializeObject(objlist);
+                return Ok(JSONresult);
             }
             else
             {

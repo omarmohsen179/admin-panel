@@ -44,9 +44,9 @@ namespace AdminPanelApi.Controllers
             {
 
                 var objlist = this.unitOfWork.StepsManager.GetAll();
-                //string JSONresult = JsonConvert.SerializeObject(objlist);
-                return Ok( 
-                     objlist
+                string JSONresult = JsonConvert.SerializeObject(objlist);
+                return Ok(
+                     JSONresult
                 );
             }
             catch (Exception ex) {
