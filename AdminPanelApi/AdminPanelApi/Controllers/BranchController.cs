@@ -34,6 +34,12 @@ namespace AdminPanelApi.Controllers
                 return Ok();
             }
         }
+        [HttpGet("/")]
+        public IActionResult Getxx()
+        {
+            return Ok("done ");
+            
+        }
         [HttpGet("admin")]
         public IActionResult Getuser()
         {

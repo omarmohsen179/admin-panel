@@ -7,7 +7,7 @@ import { ApiBaseUrl } from "./config.json";
  */
 
 export const client = axios.create({
-  baseURL: ApiBaseUrl + "/api/",
+  baseURL: ApiBaseUrl + "api/",
 
   // baseURL: "https://localhost:44351/api"
   // baseURL: "https://api.eg-sds.com/api"

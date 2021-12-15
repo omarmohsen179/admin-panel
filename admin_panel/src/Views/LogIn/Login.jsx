@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogin, user_selector } from "../../Store/AuthReducer";
 import "./Login.css";
-import axios from "axios";
+import { StoreToLocalStorage } from "../../Services/LocalStorageService";
 function Login() {
   let dispatch = useDispatch();
   let selector = useSelector(user_selector);
@@ -14,24 +14,19 @@ function Login() {
     password: "",
     rememberMe: false,
   });
+
   useEffect(() => {
     if (Object.keys(selector).length > 0) {
       history.push("/");
     }
-  }, []);
-
+  }, [selector]);
   let HandleChange = useCallback((e) => {
     setvalues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
   let Submit = useCallback(
     async (e) => {
       e.preventDefault();
-
-      let res = await userLogin(values);
-      if (res) {
-        await dispatch(res);
-        history.push("/");
-      }
+      dispatch(await userLogin(values));
     },
     [values, history]
   );

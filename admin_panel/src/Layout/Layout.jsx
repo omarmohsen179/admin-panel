@@ -18,10 +18,10 @@ const Layout = (props) => {
   const location = useLocation();
 
   React.useEffect(async () => {
+    console.log(selector);
     if (Object.keys(selector).length === 0) {
       history.push("/log-in");
     } else {
-      console.log(selector.token);
       axios.defaults.headers.Authorization = `bearer ${selector.token}`;
       await CHECK_ADMIN()
         .then((res) => {})

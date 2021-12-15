@@ -2,6 +2,7 @@
 using AdminPanelApi.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,8 @@ namespace AdminPanelApi.Controllers
             var objlist = this.unitOfWork.BenefitsManager.Get(e => e.Active == true);
             if (objlist != null)
             {
-                return Ok(objlist);
+                string JSONresult = JsonConvert.SerializeObject(objlist);
+                return Ok(JSONresult);
             }
             else
             {
@@ -56,8 +58,8 @@ namespace AdminPanelApi.Controllers
                 var Object = this.unitOfWork.BenefitsManager.Add(Temp);
                 if (Object.Id > 0)
                 {
-                    //      string JSONresult = JsonConvert.SerializeObject(member);
-                    return Ok(Object);
+                       string JSONresult = JsonConvert.SerializeObject(Object);
+                    return Ok(JSONresult);
                 }
                 else
                 {
@@ -78,8 +80,8 @@ namespace AdminPanelApi.Controllers
                 var Object = this.unitOfWork.BenefitsManager.Update(Temp);
                 if (Object)
                 {
-                    //      string JSONresult = JsonConvert.SerializeObject(Temp);
-                    return Ok(Temp);
+                 string JSONresult = JsonConvert.SerializeObject(Temp);
+                    return Ok(JSONresult);
                 }
                 else
                 {

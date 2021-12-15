@@ -39,10 +39,10 @@ export const userLogin = createAsyncThunk(
       data: arg,
     })
       .then(({ data }) => {
-        axios.defaults.headers.Authorization = `bearer ${data.token}`;
         if (arg.rememberMe) {
           StoreToLocalStorage("user-auth", data.token, data.expiresOn);
         }
+
         return { ...data, rememberMe: arg.rememberMe };
       })
       .catch((error) => {
@@ -51,6 +51,12 @@ export const userLogin = createAsyncThunk(
   }
 );
 
+export const userLoginLocalStorage = createAsyncThunk(
+  "auth/userLogin",
+  async (arg, { dispatch, getState }) => {
+    return { ...arg };
+  }
+);
 export const memberLogin = createAsyncThunk(
   "auth/memberLogin",
   async (arg, { dispatch, getState }) => {
@@ -111,8 +117,9 @@ const AuthReducer = createSlice({
 
         if (payload.rememberMe)
           StoreToLocalStorage("auth_user", payload, payload.expiresOn);
-
-        notify(`${payload.email} Logged in successfully`, "success", 3000);
+        if (payload.email) {
+          notify(`${payload.email} Logged in successfully`, "success", 3000);
+        }
       }
       state.loading = false;
     },

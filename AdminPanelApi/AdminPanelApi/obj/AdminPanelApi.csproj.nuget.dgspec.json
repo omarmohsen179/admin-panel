@@ -62,14 +62,14 @@
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[5.0.0, )",
+              "version": "[5.0.4, )",
               "noWarn": [
                 "NU1605"
               ]
             },
             "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
               "target": "Package",
-              "version": "[5.0.0, )",
+              "version": "[5.0.4, )",
               "noWarn": [
                 "NU1605"
               ]
@@ -95,6 +95,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.9, )"
+            },
+            "Microsoft.Identity.Web": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Microsoft.Identity.Web.UI": {
+              "target": "Package",
+              "version": "[1.1.0, )"
             },
             "MimeKit": {
               "target": "Package",
