@@ -40,16 +40,20 @@ namespace AdminPanelApi.Controllers
         [HttpGet("admin")]
         public IActionResult Getuser()
         {
-            var objlist = this.unitOfWork.StepsManager.GetAll();
-            if (objlist != null)
+            try
             {
+
+                var objlist = this.unitOfWork.StepsManager.GetAll();
                 string JSONresult = JsonConvert.SerializeObject(objlist);
-                return Ok(JSONresult);
+                return Ok(
+                     JSONresult
+                );
             }
-            else
-            {
-                return BadRequest();
-            }
+            catch (Exception ex) {
+                return Ok(ex);
+             }
+
+    
         }
         [HttpPost]
         public IActionResult Insert([FromBody] Step Temp)

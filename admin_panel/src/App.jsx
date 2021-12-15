@@ -12,12 +12,13 @@ import { GetFromLocalStorage } from "./Services/LocalStorageService";
 
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { userLoginLocalStorage } from "./Store/AuthReducer";
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    !GetFromLocalStorage("user-auth") &&
-      dispatch(GetFromLocalStorage("user-auth"));
+    GetFromLocalStorage("user-auth") &&
+      dispatch(userLoginLocalStorage(GetFromLocalStorage("user-auth")));
   }, []);
   return (
     <div className="App">

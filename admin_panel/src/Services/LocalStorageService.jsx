@@ -2,7 +2,7 @@ export function StoreToLocalStorage(key, value, expireOn) {
   // `item` is an object which contains the original value
   // as well as the time when it's supposed to expire
   const item = {
-    value: value,
+    ...value,
     expiry: new Date(expireOn).getTime(),
   };
   localStorage.setItem(key, JSON.stringify(item));
@@ -23,7 +23,7 @@ export function GetFromLocalStorage(key) {
     localStorage.removeItem(key);
     return {};
   }
-  return item.value;
+  return item;
 }
 
 export function RemoveFromLocalStorage(key) {

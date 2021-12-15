@@ -1,0 +1,1114 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/RegisterModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Auth/register-admin": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/RegisterModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/TokenRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Auth/forget-passworx": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ForgetPasswordFormForgetPasswordForm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Auth/check-type": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Benefits": {
+      "get": {
+        "tags": [
+          "Benefits"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Benefits"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Benefit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Benefits"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Benefit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Benefits/admin": {
+      "get": {
+        "tags": [
+          "Benefits"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Benefits/{id}": {
+      "delete": {
+        "tags": [
+          "Benefits"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Branch": {
+      "get": {
+        "tags": [
+          "Branch"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Branch"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Branch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Branch"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Branch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "Branch"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Branch/admin": {
+      "get": {
+        "tags": [
+          "Branch"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Branch/{id}": {
+      "delete": {
+        "tags": [
+          "Branch"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Member": {
+      "get": {
+        "tags": [
+          "Member"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Member"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "ContentType",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ContentDisposition",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Headers",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Length",
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "formData",
+            "name": "Name",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "FileName",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "MemberName",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "MemberNameEn",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Note",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "NoteEn",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ImagePath",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Active",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Member"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "ContentType",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ContentDisposition",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Headers",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Length",
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "formData",
+            "name": "Name",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "FileName",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "MemberName",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "MemberNameEn",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Note",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "NoteEn",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ImagePath",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Active",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Member/{id}": {
+      "delete": {
+        "tags": [
+          "Member"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Section": {
+      "get": {
+        "tags": [
+          "Section"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Section"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "ContentType",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ContentDisposition",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Headers",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Length",
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "formData",
+            "name": "Name",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "FileName",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "SectionName",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Index",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "Text",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Text"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "Image.ImagePath",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Image.SectionId",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.SectionName",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Index",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Text",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Text"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Image.ImagePath",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Image.SectionId",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Image.Section"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Section"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "ContentType",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ContentDisposition",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Headers",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Length",
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "formData",
+            "name": "Name",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "FileName",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "SectionName",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Index",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "Text",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Text"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "Image.ImagePath",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Image.SectionId",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Id",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.SectionName",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Index",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Text",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Text"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Image.ImagePath",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Image.SectionId",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "Image.Section.Image.Section"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Section/{id}": {
+      "delete": {
+        "tags": [
+          "Section"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Steps": {
+      "get": {
+        "tags": [
+          "Steps"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Steps"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Step"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Steps"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Step"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Steps/admin": {
+      "get": {
+        "tags": [
+          "Steps"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Steps/{id}": {
+      "delete": {
+        "tags": [
+          "Steps"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RegisterModel": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "email": {
+          "format": "email",
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenRequestModel": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "email": {
+          "format": "email",
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "ForgetPasswordFormForgetPasswordForm": {
+      "required": [
+        "email"
+      ],
+      "type": "object",
+      "properties": {
+        "email": {
+          "format": "email",
+          "type": "string"
+        }
+      }
+    },
+    "Benefit": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "image": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "titleEn": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "ddescriptionEn": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Number": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "branchId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "branch": {
+          "$ref": "#/definitions/Branch"
+        }
+      }
+    },
+    "Branch": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "countryEn": {
+          "type": "string"
+        },
+        "cityEn": {
+          "type": "string"
+        },
+        "addressEn": {
+          "type": "string"
+        },
+        "numbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Number"
+          }
+        },
+        "active": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SectionImages": {
+      "type": "object",
+      "properties": {
+        "imagePath": {
+          "type": "string"
+        },
+        "sectionId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "section": {
+          "$ref": "#/definitions/Section"
+        }
+      }
+    },
+    "Section": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sectionName": {
+          "type": "string"
+        },
+        "index": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "text": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Text"
+          }
+        },
+        "image": {
+          "$ref": "#/definitions/SectionImages"
+        }
+      }
+    },
+    "Text": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "content": {
+          "type": "string"
+        },
+        "sectionId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "section": {
+          "$ref": "#/definitions/Section"
+        }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "titleEn": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "descriptionEn": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
