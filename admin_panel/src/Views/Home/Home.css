@@ -16,8 +16,39 @@
   margin: auto;
 }
 .step-card-title {
-  font-weight: 600px;
+  font-weight: 600;
+  font-size: 17px;
 }
 .decs-card-title {
   color: rgb(51, 51, 51);
+}
+.Home-steps-card:hover {
+  background-color: antiquewhite;
+  cursor: pointer;
+}
+.delete-icon-crud {
+  font-size: 24px;
+  margin: auto;
+  display: flex;
+  justify-content: end;
+}
+.Add-icon-form {
+  font-size: 35px;
+  margin: auto;
+  cursor: pointer;
+  /* padding: 0 31px; */
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+}
+.Add-icon-form:hover i {
+  /*color: #7272f5;*/
+}
+.Home-benefits-card {
+  padding: 20px;
+  display: flex;
+}
+.Home-benefits-card:hover {
+  background-color: antiquewhite;
+  cursor: pointer;
 }

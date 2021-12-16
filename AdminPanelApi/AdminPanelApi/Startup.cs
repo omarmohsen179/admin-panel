@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,11 +81,7 @@ namespace AdminPanelApi
             services.AddScoped<IJwtService, JwtService>();
             services.AddTransient<IMailService, MailService>();
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
-         
-
-
             services.AddControllers();
-
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -94,8 +91,6 @@ namespace AdminPanelApi
             {
                 options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
-
-        
 
             services.AddCors(options =>
             {

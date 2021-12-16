@@ -10,7 +10,7 @@ namespace AdminPanelApi.Models
     {
         public int Id { get; set; }
         public string PhoneNumber { get; set; }
-
+        public bool Active { get; set; }
         public int BranchId { get; set; }
         [JsonIgnore]
         public Branch Branch { get; set; }

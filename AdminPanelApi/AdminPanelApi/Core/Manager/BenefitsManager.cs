@@ -2,9 +2,9 @@
 
 namespace AdminPanelApi.Core.Manager
 {
-    public class BenefitsManager : Repository<Benefit, AppDbContext>
+    public class InventorsManager : Repository<Inventor, AppDbContext>
     {
-        public BenefitsManager(AppDbContext context) : base(context)
+        public InventorsManager(AppDbContext context) : base(context)
         {
 
         }

@@ -147,5 +147,20 @@ namespace AdminPanelApi.Core
             }
 
         }
+        private InventorsManager inventorsManager;
+
+        public InventorsManager InventorsManager
+        {
+
+            get
+            {
+                if (inventorsManager == null)
+                {
+                    inventorsManager = new InventorsManager(context);
+                }
+                return inventorsManager;
+            }
+
+        }
     }
 }

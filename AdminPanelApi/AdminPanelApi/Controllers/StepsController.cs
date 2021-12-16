@@ -38,7 +38,7 @@ namespace AdminPanelApi.Controllers
             }
         }
         [HttpGet("admin")]
-        public IActionResult Getuser()
+        public IActionResult Getadmin()
         {
             try
             {

@@ -33,6 +33,7 @@ namespace AdminPanelApi.Models
 
         public DbSet<Step> Step { get; set; }
         public DbSet<Text> Text { get; set; }
+        public DbSet<Inventor> Inventors { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -45,6 +46,7 @@ namespace AdminPanelApi.Models
             modelBuilder.ApplyConfiguration(new SectionImagesConfiguration());
             modelBuilder.ApplyConfiguration(new StepsConfiguration());
             modelBuilder.ApplyConfiguration(new TextConfiguration());
+            modelBuilder.ApplyConfiguration(new InventorConfiguration());
             SeedRoles(modelBuilder);
 
             //modelBuilder.ApplyConfiguration(new ProductControlConfigurations());

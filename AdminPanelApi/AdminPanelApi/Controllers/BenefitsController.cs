@@ -1,6 +1,9 @@
 ﻿using AdminPanelApi.Core;
+using AdminPanelApi.Helpers;
 using AdminPanelApi.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -16,11 +19,12 @@ namespace AdminPanelApi.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper _mapper;
-
-        public BenefitsController(IUnitOfWork unitOfWork, IMapper mapper)
+        public static ImageUploder _imageUploder;
+        public BenefitsController(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment enviroment)
         {
             this.unitOfWork = unitOfWork;
             this._mapper = mapper;
+            _imageUploder = new ImageUploder(enviroment);
         }
         [HttpGet]
         public IActionResult Get()
@@ -51,8 +55,28 @@ namespace AdminPanelApi.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Insert([FromBody] Benefit Temp)
+        public IActionResult Insert([FromForm] IFormFile Image, [FromForm] Benefit Temp)
         {
+            try
+            {
+                if (Image != null)
+                {
+                    var result = _imageUploder.UplodeFile(Image);
+                    if (result.isOk)
+                    {
+                        Temp.ImagePath = result.value;
+                    }
+                    else
+                    {
+                        return BadRequest(result);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+
 
             try
             {
@@ -74,8 +98,28 @@ namespace AdminPanelApi.Controllers
         }
         [HttpPut]
 
-        public IActionResult Update([FromBody] Benefit Temp)
+        public IActionResult Update([FromForm] IFormFile Image, [FromForm] Benefit Temp)
         {
+
+            try
+            {
+                if (Image != null)
+                {
+                    var result = _imageUploder.UplodeFile(Image);
+                    if (result.isOk)
+                    {
+                        Temp.ImagePath = result.value;
+                    }
+                    else
+                    {
+                        return BadRequest(result);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
             try
             {
                 var Object = this.unitOfWork.BenefitsManager.Update(Temp);

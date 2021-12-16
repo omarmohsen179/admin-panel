@@ -17,5 +17,6 @@ namespace AdminPanelApi.Core
         SectionManager SectionManager { get; }
         StepsManager StepsManager { get; }
         TextManager TextManager { get; }
+        InventorsManager InventorsManager { get; }
     }
 }

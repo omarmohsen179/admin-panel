@@ -29,14 +29,29 @@ namespace AdminPanelApi.Controllers
         [HttpGet]
         public IActionResult GetMembers()
         {
-            var Members = this.unitOfWork.MemberManager.Get();
+            var Members = this.unitOfWork.MemberManager.Get(e=>e.Active==true);
             if (Members != null)
             {
-                return Ok(Members);
+                string JSONresult = JsonConvert.SerializeObject(Members);
+                return Ok(JSONresult);
             }
             else
             {
                 return Ok();
+            }
+        }
+        [HttpGet("admin")]
+        public IActionResult Getuser()
+        {
+            var objlist = this.unitOfWork.MemberManager.GetAll();
+            if (objlist != null)
+            {
+                string JSONresult = JsonConvert.SerializeObject(objlist);
+                return Ok(JSONresult);
+            }
+            else
+            {
+                return BadRequest();
             }
         }
         [HttpPost]
@@ -71,8 +86,8 @@ namespace AdminPanelApi.Controllers
                 var member = this.unitOfWork.MemberManager.Add(Temp);
                 if (member.Id > 0)
                 {
-                    //      string JSONresult = JsonConvert.SerializeObject(member);
-                    return Ok(member);
+                        string JSONresult = JsonConvert.SerializeObject(member);
+                    return Ok(JSONresult);
                 }
                 else
                 {
@@ -113,8 +128,8 @@ namespace AdminPanelApi.Controllers
                 var member = this.unitOfWork.MemberManager.Update(Temp);
                 if (member)
                 {
-                    //      string JSONresult = JsonConvert.SerializeObject(Temp);
-                    return Ok(Temp);
+                   string JSONresult = JsonConvert.SerializeObject(Temp);
+                    return Ok(JSONresult);
                 }
                 else
                 {

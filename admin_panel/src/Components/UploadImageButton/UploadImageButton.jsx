@@ -4,7 +4,7 @@ import { BiImageAdd } from "react-icons/bi";
 
 import { useTranslation } from "react-i18next";
 
-const UploadImageButton= ({
+const UploadImageButton = ({
   isMultiple,
   handleGetImages,
   handleRemoveImage,
@@ -30,7 +30,7 @@ const UploadImageButton= ({
           required={required}
           className={"d-none"}
           onClick={(event) => {
-            const element = event.target ;
+            const element = event.target;
             element.value = "";
           }}
           onChange={(event) => handleGetImages(event)}
@@ -43,7 +43,7 @@ const UploadImageButton= ({
             type="button"
             onClick={() => fileInput.current.click()}
           >
-            {t("Upload Image")} <BiImageAdd style={{ fontSize: "20px" }} />
+            {"Upload Image"} <BiImageAdd style={{ fontSize: "20px" }} />
           </button>
 
           {imagesFiles.length > 0 ? (

@@ -3,6 +3,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "popper.js/dist/popper";
 import "devextreme/dist/css/dx.light.css";
+
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Route, Switch } from "react-router-dom";
 import Layout from "./Layout/Layout";

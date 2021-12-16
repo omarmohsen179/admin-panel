@@ -1,3 +1,4 @@
+import AboutUs from "../Views/AboutUs/AbourUs";
 import Home from "../Views/Home/Home";
 
 export const routes = [
@@ -12,7 +13,7 @@ export const routes = [
     path: "/About-us",
     name: "About us",
     icon: "fas fa-user-edit",
-    component: Home,
+    component: AboutUs,
     layout: "",
   },
   {
