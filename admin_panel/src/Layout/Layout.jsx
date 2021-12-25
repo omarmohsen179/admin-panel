@@ -21,15 +21,6 @@ const Layout = (props) => {
     console.log(selector);
     if (Object.keys(selector).length === 0) {
       history.push("/log-in");
-    } else {
-      axios.defaults.headers.Authorization = `bearer ${selector.token}`;
-      await CHECK_ADMIN()
-        .then((res) => {})
-        .catch((err) => {
-          RemoveFromLocalStorage("user");
-          dispatch(signOut());
-          history.push("/log-in");
-        });
     }
     mainPanel.current && (mainPanel.current.scrollTop = 0);
     document.scrollingElement && (document.scrollingElement.scrollTop = 0);

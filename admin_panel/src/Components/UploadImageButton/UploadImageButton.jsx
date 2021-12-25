@@ -69,9 +69,10 @@ const UploadImageButton = ({
               position: "relative",
             }}
           >
-            {imagesFiles.map((element) => {
+            {imagesFiles.map((element, index) => {
               return (
                 <div
+                  key={index}
                   style={{
                     width: "100px",
                     height: "100px",

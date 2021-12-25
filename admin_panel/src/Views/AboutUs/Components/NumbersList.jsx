@@ -5,6 +5,7 @@ import InputTwoLanguages from "../../../Components/InputTwoLanguages/InputTwoLan
 import notify from "devextreme/ui/notify";
 import { useTranslation } from "react-i18next";
 import { NUMBER_DELETE } from "../AboutUs.Api";
+import LabeledInput from "../../../Components/Inputs/LabeledInput";
 
 const NumbersList = ({ data, setdata }) => {
   const { t, i18n } = useTranslation();
@@ -14,40 +15,36 @@ const NumbersList = ({ data, setdata }) => {
       if (element > 0) {
         await NUMBER_DELETE(element)
           .then(() => {
-            setdata(
-              data.filter(function (el) {
-                return el.id !== element;
-              })
-            );
+            let dataAfterDelete = data.filter(function (el) {
+              return el.Id !== element;
+            });
+
+            setdata(dataAfterDelete);
             notify(
-              { message: t("Deleted Successfully"), width: 600 },
+              { message: "Deleted Successfully", width: 600 },
               "success",
               3000
             );
           })
           .catch(() => {
-            notify(
-              { message: t("Failed Try again"), width: 600 },
-              "error",
-              3000
-            );
+            notify({ message: "Failed Try again", width: 600 }, "error", 3000);
           });
       } else {
         setdata(
           data.filter(function (el) {
-            return el.id !== element;
+            return el.Id !== element;
           })
         );
       }
     },
-    [data, t, setdata]
+    [data, setdata]
   );
 
   let HandleChange = useCallback(
-    (id, value, name) => {
+    (Id, value, name) => {
       setdata(
         data.map((da) => {
-          if (da.id === id) {
+          if (da.Id === Id) {
             return { ...da, [name]: value };
           }
           return da;
@@ -68,25 +65,20 @@ const NumbersList = ({ data, setdata }) => {
                   <div className="row">
                     <div className="col">
                       <FormGroup>
-                        <InputTwoLanguages
-                          id="title"
-                          label={t("Title")}
-                          onValueChange={(n, v) => HandleChange(da.id, n, v)}
-                          value={da.title}
-                          valueEn={da.titleEn}
+                        <LabeledInput
+                          Label="Phone Number"
+                          value={da.PhoneNumber}
+                          HandleChange={(name, value) =>
+                            HandleChange(da.Id, name, value)
+                          }
+                          name="PhoneNumber"
                         />
                       </FormGroup>
                     </div>
-                  </div>
-
-                  <div
-                    className="row"
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <div className="col">
+                    <div className="col number-list-delete-button ">
                       <Button
                         className="btn btn btn-danger col-12"
-                        onClick={() => Delete(da.id)}
+                        onClick={() => Delete(da.Id)}
                         // disabled={da.id <= 0}
                         //  onClick={Dele}
                       >

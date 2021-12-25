@@ -3016,6 +3016,30 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Twilio/5.69.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.3.0",
+          "Newtonsoft.Json": "11.0.2",
+          "System.Collections.Specialized": "4.3.0",
+          "System.IdentityModel.Tokens.Jwt": "5.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Twilio.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Twilio.dll": {}
+        }
+      },
+      "WhatsAppAPI/15.4.29": {
+        "type": "package",
+        "compile": {
+          "lib/net40/WhatsAppApi.dll": {}
+        },
+        "runtime": {
+          "lib/net40/WhatsAppApi.dll": {}
+        }
       }
     }
   },
@@ -9596,6 +9620,37 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Twilio/5.69.0": {
+      "sha512": "j6yvOwgnNPPINgPD8y3ppLLQl5UgO5YaRXn95rL2u4UQTr/BTPODJ8JdIG6W9O8EkXFiLB4rxHs9KoeGGvXiHQ==",
+      "type": "package",
+      "path": "twilio/5.69.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/Twilio.dll",
+        "lib/net35/Twilio.xml",
+        "lib/net451/Twilio.dll",
+        "lib/net451/Twilio.xml",
+        "lib/netstandard1.4/Twilio.dll",
+        "lib/netstandard1.4/Twilio.xml",
+        "lib/netstandard2.0/Twilio.dll",
+        "lib/netstandard2.0/Twilio.xml",
+        "twilio.5.69.0.nupkg.sha512",
+        "twilio.nuspec"
+      ]
+    },
+    "WhatsAppAPI/15.4.29": {
+      "sha512": "6vUddAcHsxUSi2DBHrGC9Af/n6b4TeLmMSE4+HqlOn6k3FtzRxEgmDEZpzL7rkGaP1M+/nypWsObKMcvl24p3Q==",
+      "type": "package",
+      "path": "whatsappapi/15.4.29",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/WhatsAppApi.dll",
+        "whatsappapi.15.4.29.nupkg.sha512",
+        "whatsappapi.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -9620,7 +9675,9 @@
       "Newtonsoft.Json >= 13.0.1",
       "Swashbuckle.AspNetCore >= 5.6.3",
       "System.Collections >= 4.3.0",
-      "System.Drawing.Common >= 5.0.2"
+      "System.Drawing.Common >= 5.0.2",
+      "Twilio >= 5.69.0",
+      "WhatsAppAPI >= 15.4.29"
     ]
   },
   "packageFolders": {
@@ -9753,6 +9810,14 @@
           "System.Drawing.Common": {
             "target": "Package",
             "version": "[5.0.2, )"
+          },
+          "Twilio": {
+            "target": "Package",
+            "version": "[5.69.0, )"
+          },
+          "WhatsAppAPI": {
+            "target": "Package",
+            "version": "[15.4.29, )"
           }
         },
         "imports": [
@@ -9773,7 +9838,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -9784,6 +9849,16 @@
       "warningLevel": 1,
       "message": "Package 'Microsoft.AspNet.WebApi.Core 5.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.AspNet.WebApi.Core",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'WhatsAppAPI 15.4.29' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "WhatsAppAPI",
       "targetGraphs": [
         "net5.0"
       ]

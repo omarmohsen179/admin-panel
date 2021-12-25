@@ -1,4 +1,5 @@
 import AboutUs from "../Views/AboutUs/AbourUs";
+import Footer from "../Views/Footer/Footer";
 import Home from "../Views/Home/Home";
 
 export const routes = [
@@ -20,7 +21,7 @@ export const routes = [
     path: "/Footer",
     name: "Footer",
     icon: "fas fa-home",
-    component: Home,
+    component: Footer,
     layout: "",
   },
 ];

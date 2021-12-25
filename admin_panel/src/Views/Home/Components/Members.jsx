@@ -4,10 +4,6 @@ import CardForm from "../../../Components/CardForm/CardForm";
 import PopUpModel from "../../../Components/PopUpModel/PopUpModel";
 import YesOrNoPopUp from "../../../Components/YesOrNoPopUp/YesOrNoPopUp";
 import {
-  BENEFITS,
-  BENEFITS_DELETE,
-  BENEFITS_INSERT,
-  BENEFITS_UPDATE,
   MEMBER,
   MEMBER_DELETE,
   MEMBER_INSERT,
@@ -127,8 +123,8 @@ function Member() {
                 onClick={() => setpopup({ data: res, status: !popup.status })}
                 className="col-lg-8 col-md-7 col-sm-4"
               >
-                <div className="step-card-title">{res.MemberName}</div>
-                <div>{res.Note}</div>
+                <div className="step-card-title">{res.MemberNameEn}</div>
+                <div>{res.NoteEn}</div>
               </div>
               <div
                 className="col-lg-2 col-md-2 col-sm-2 delete-icon-crud"

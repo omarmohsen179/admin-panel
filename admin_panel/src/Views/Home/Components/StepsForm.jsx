@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Card, FormGroup, CardBody, CardHeader } from "reactstrap";
-import SubmitButtons from "../../../Components/Buttons/SubmitButtons";
+import React, { useCallback } from "react";
+import { FormGroup } from "reactstrap";
+
 import InputTwoLanguages from "../../../Components/InputTwoLanguages/InputTwoLanguages";
 function StepsForm({ data, setdata }) {
   const HandleChange = useCallback(

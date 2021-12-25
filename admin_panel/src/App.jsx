@@ -10,16 +10,17 @@ import Layout from "./Layout/Layout";
 import Login from "./Views/LogIn/Login";
 import ForgetPassword from "./Views/ForgetPassword/ForgetPassword";
 import { GetFromLocalStorage } from "./Services/LocalStorageService";
-
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { userLoginLocalStorage } from "./Store/AuthReducer";
 function App() {
   const dispatch = useDispatch();
-
+  let history = useHistory();
   useEffect(() => {
     GetFromLocalStorage("user-auth") &&
       dispatch(userLoginLocalStorage(GetFromLocalStorage("user-auth")));
+    !GetFromLocalStorage("user-auth") && history.push("/log-in");
   }, []);
   return (
     <div className="App">

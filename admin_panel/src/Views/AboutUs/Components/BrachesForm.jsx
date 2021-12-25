@@ -1,9 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Card, FormGroup, CardBody, CardHeader } from "reactstrap";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Card, FormGroup, CardBody, CardHeader, Button } from "reactstrap";
 import SubmitButtons from "../../../Components/Buttons/SubmitButtons";
 import InputTwoLanguages from "../../../Components/InputTwoLanguages/InputTwoLanguages";
 import NumbersList from "./NumbersList";
 function BranchesForm({ data, setdata }) {
+  let NumberDefualtValues = useRef({
+    Id: 0,
+    PhoneNumber: "",
+    Active: false,
+    BranchId: 0,
+  });
   const HandleChange = useCallback(
     (value, id) => {
       setdata({
@@ -13,7 +19,31 @@ function BranchesForm({ data, setdata }) {
     },
     [data]
   );
-
+  const HandleChangeNumbers = useCallback(
+    (value) => {
+      setdata({
+        ...data,
+        Numbers: value,
+      });
+    },
+    [data]
+  );
+  let counter = useRef(0);
+  let NewDefinion = useCallback(() => {
+    if (!data.Numbers) {
+      data.Numbers = [{ ...NumberDefualtValues.current }];
+    } else {
+      counter.current -= 1;
+      data.Numbers?.push({
+        ...NumberDefualtValues.current,
+        Id: counter.current,
+      });
+    }
+    setdata({
+      ...data,
+      Numbers: data.Numbers,
+    });
+  }, [data]);
   return (
     <div style={{ width: "100%" }}>
       <FormGroup>
@@ -59,7 +89,20 @@ function BranchesForm({ data, setdata }) {
           onChange={(e) => HandleChange(e.target.checked, e.target.id)}
         />
       </FormGroup>
-      <NumbersList />
+      <NumbersList data={data.Numbers} setdata={HandleChangeNumbers} />
+
+      <Button
+        className="btn btn btn-success col-12"
+        onClick={NewDefinion}
+        //  disabled={
+        //    Sevice.programDefinitionList?.find((e) => e.id == 0)
+        //      ? true
+        //     : false
+        // }
+        // onClick={saveHandle}
+      >
+        +
+      </Button>
     </div>
   );
 }

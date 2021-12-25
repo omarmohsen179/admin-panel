@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fvLuA9vxrzrpdbqHlDjHf5wkI1ElISKi3EoFOoiY1kS2hjtjPjQ+clwsAcuXXSAs84WLwYRQDXTVmFYD5UTKxg==",
+  "dgSpecHash": "8vpinSpsY/6U6ZtxBGc//OBT8PCYFlYMCSt31EO4W2jxTApSe3hHjVEW2P4EqFg/S8DBJvPGSMKdDMZ/B2MY2Q==",
   "success": true,
   "projectFilePath": "D:\\omar\\ADMIN\\AdminPanel\\AdminPanelApi\\AdminPanelApi\\AdminPanelApi.csproj",
   "expectedPackageFiles": [
@@ -207,7 +207,9 @@
     "C:\\Users\\Ahmed\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Ahmed\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Ahmed\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Ahmed\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\Ahmed\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\Ahmed\\.nuget\\packages\\twilio\\5.69.0\\twilio.5.69.0.nupkg.sha512",
+    "C:\\Users\\Ahmed\\.nuget\\packages\\whatsappapi\\15.4.29\\whatsappapi.15.4.29.nupkg.sha512"
   ],
   "logs": [
     {
@@ -216,6 +218,16 @@
       "warningLevel": 1,
       "message": "Package 'Microsoft.AspNet.WebApi.Core 5.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.AspNet.WebApi.Core",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'WhatsAppAPI 15.4.29' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "WhatsAppAPI",
       "targetGraphs": [
         "net5.0"
       ]

@@ -122,8 +122,8 @@ function Inventor() {
                 onClick={() => setpopup({ data: res, status: !popup.status })}
                 className="col-lg-8 col-md-7 col-sm-4"
               >
-                <div className="step-card-title">{res.Title}</div>
-                <div>{res.Description}</div>
+                <div className="step-card-title">{res.TitleEn}</div>
+                <div>{res.DescriptionEn}</div>
               </div>
               <div
                 className="col-lg-2 col-md-2 col-sm-2 delete-icon-crud"

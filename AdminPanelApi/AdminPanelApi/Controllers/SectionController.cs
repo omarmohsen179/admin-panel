@@ -1,10 +1,12 @@
 ﻿using AdminPanelApi.Core;
+using AdminPanelApi.DTOs;
 using AdminPanelApi.Helpers;
 using AdminPanelApi.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,19 +31,33 @@ namespace AdminPanelApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var Sections = this.unitOfWork.SectionManager.Get();
+            var Sections = this.unitOfWork.SectionManager.Get(includeProperties: "Text,Image");
             if (Sections != null)
             {
-                return Ok(Sections);
+                string JSONresult = JsonConvert.SerializeObject(Sections);
+                return Ok(JSONresult);
             }
             else
             {
                 return Ok();
             }
         }
-
+        [HttpGet("{page}")]
+        public IActionResult Getpage(string page)
+        {
+            var Sections = this.unitOfWork.SectionManager.Get(includeProperties: "Text,Image", filter:e=>e.SectionName==page);
+            if (Sections != null)
+            {
+                string JSONresult = JsonConvert.SerializeObject(Sections);
+                return Ok(JSONresult);
+            }
+            else
+            {
+                return Ok();
+            }
+        }
         [HttpPost]
-        public IActionResult InsertMember([FromForm] IFormFile Image, [FromForm] Section Temp)
+        public IActionResult InsertMember([FromForm] IFormFile Imageup, [FromForm] Section Temp)
         {
 
 
@@ -56,15 +72,16 @@ namespace AdminPanelApi.Controllers
                     try
                     {
 
-                        if (Image != null)
+                        if (Imageup != null)
                         {
-                            var result = _imageUploder.UplodeFile(Image);
+                            var result = _imageUploder.UplodeFile(Imageup);
                             if (result.isOk)
                             {
                                 var images = new SectionImages() { SectionId = secion.Id, ImagePath = Temp.Image?.ImagePath, Section = Temp };
                                 // var images = new SectionImages() { SectionId = Temp.Id,ImagePath= result.value,Section=Temp };
-                                images.ImagePath = result.value;
-                                var member = this.unitOfWork.SectionImagesManager.Update(Temp);
+                        images.ImagePath = result.value;
+                        var member = this.unitOfWork.SectionImagesManager.Update(images);
+                        Temp.Image = images;
                             }
                             else
                             {
@@ -76,8 +93,8 @@ namespace AdminPanelApi.Controllers
                     {
                         return BadRequest(e);
                     }
-                    //      string JSONresult = JsonConvert.SerializeObject(Temp);
-                    return Ok(Temp);
+                    string JSONresult = JsonConvert.SerializeObject(Temp);
+                    return Ok(JSONresult);
                 }
                 else
                 {
@@ -91,22 +108,23 @@ namespace AdminPanelApi.Controllers
         }
         [HttpPut]
 
-        public IActionResult Update([FromForm] IFormFile Image, [FromForm] Section Temp)
+        public IActionResult Update([FromForm] IFormFile Imageup, [FromForm] SectionDto Tempx)
         {
        
-
+            Section Temp= _mapper.Map<Section>(Tempx);
             try
             {
               
-                if (Image != null)
+                if (Imageup != null)
                 {
-                    var result = _imageUploder.UplodeFile(Image);
+                    var result = _imageUploder.UplodeFile(Imageup);
                     if (result.isOk)
                     {
                         var images = new SectionImages() { SectionId = Temp.Id, ImagePath = Temp.Image?.ImagePath, Section = Temp };
-                        // var images = new SectionImages() { SectionId = Temp.Id,ImagePath= result.value,Section=Temp };
+                      
                         images.ImagePath = result.value;
-                        var member = this.unitOfWork.SectionImagesManager.Update(Temp);
+                        var member = this.unitOfWork.SectionImagesManager.Update(images);
+                        Temp.Image = images;
                     }
                     else
                     {
@@ -120,16 +138,22 @@ namespace AdminPanelApi.Controllers
             }
             try
             {
-                var texts = this.unitOfWork.TextManager.UpdateList(Temp.Text);
-                var member = this.unitOfWork.SectionManager.Update(Temp);
-                if (member)
+                foreach (var ele in Temp.Text)
                 {
-                    //      string JSONresult = JsonConvert.SerializeObject(Temp);
-                    return Ok(Temp);
+                    ele.SectionId = Temp.Id;
+                    ele.Section = Temp;
+                }
+                var texts = this.unitOfWork.TextManager.UpdateList(Temp.Text);
+                var obj = this.unitOfWork.SectionManager.Update(Temp);
+                if (obj)
+                {
+
+                    string JSONresult = JsonConvert.SerializeObject(Temp);
+                    return Ok(JSONresult);
                 }
                 else
                 {
-                    return BadRequest(member);
+                    return BadRequest(obj);
                 }
             }
             catch (Exception e)

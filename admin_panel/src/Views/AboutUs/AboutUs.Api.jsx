@@ -56,6 +56,6 @@ export const BRANCHES_DELETE = async (id) => {
 export const NUMBER_DELETE = async (id) => {
   return await REQUEST({
     method: "delete",
-    url: "Branch/" + id,
+    url: "Branch/number/" + id,
   });
 };

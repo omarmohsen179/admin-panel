@@ -114,8 +114,8 @@ function Steps() {
                 onClick={() => setpopup({ data: res, status: !popup.status })}
                 className="col"
               >
-                <div className="step-card-title">{res.Title}</div>
-                <div>{res.Description}</div>
+                <div className="step-card-title">{res.TitleEn}</div>
+                <div>{res.DescriptionEn}</div>
               </div>
               <div
                 className="delete-icon-crud"

@@ -289,6 +289,50 @@ namespace AdminPanelApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Section");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Index = 1,
+                            SectionName = "Home"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Index = 2,
+                            SectionName = "Home"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Index = 3,
+                            SectionName = "Home"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Index = 4,
+                            SectionName = "Home"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Index = 1,
+                            SectionName = "aboutus"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Index = 2,
+                            SectionName = "aboutus"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Index = 1,
+                            SectionName = "footer"
+                        });
                 });
 
             modelBuilder.Entity("AdminPanelApi.Models.SectionImages", b =>
@@ -303,6 +347,13 @@ namespace AdminPanelApi.Migrations
                     b.HasKey("SectionId");
 
                     b.ToTable("SectionImages");
+
+                    b.HasData(
+                        new
+                        {
+                            SectionId = 1,
+                            ImagePath = ""
+                        });
                 });
 
             modelBuilder.Entity("AdminPanelApi.Models.Step", b =>
@@ -376,14 +427,195 @@ namespace AdminPanelApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ContentEn")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("SectionId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEn")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SectionId");
 
                     b.ToTable("Text");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "Build a",
+                            ContentEn = "Build a",
+                            SectionId = 1,
+                            Title = "Title Text ",
+                            TitleEn = "Title Text "
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Content = "are slanted",
+                            ContentEn = "are slanted",
+                            SectionId = 1,
+                            Title = "Animated Text ",
+                            TitleEn = "Animated Text "
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Content = "Some strings are bold",
+                            ContentEn = "Some strings are bold",
+                            SectionId = 1,
+                            Title = "Animated Text ",
+                            TitleEn = "Animated Text "
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Content = "HTML characters &times; &copy;",
+                            ContentEn = "HTML characters &times; &copy;",
+                            SectionId = 1,
+                            Title = "Animated Text ",
+                            TitleEn = "Animated Text "
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Content = "in minutes",
+                            ContentEn = "in minutes",
+                            SectionId = 1,
+                            Title = "Title Text ",
+                            TitleEn = "Title Text "
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Content = "Build forms and share them online. Get an email or Slack message for each submission.",
+                            ContentEn = "Build forms and share them online. Get an email or Slack message for each submission.",
+                            SectionId = 1,
+                            Title = "description Text ",
+                            TitleEn = "description Text "
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Content = "Get started free",
+                            ContentEn = "Get started free",
+                            SectionId = 1,
+                            Title = "button  Text ",
+                            TitleEn = "Title Text "
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Content = "How it works",
+                            ContentEn = "How it works",
+                            SectionId = 2,
+                            Title = "Title Text ",
+                            TitleEn = "Title Text "
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Content = "",
+                            ContentEn = "",
+                            SectionId = 2,
+                            Title = "description Text ",
+                            TitleEn = "Title Text "
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Content = "Zendesk Sell lead capture automation",
+                            ContentEn = "Zendesk Sell lead capture automation",
+                            SectionId = 3,
+                            Title = "Title Text ",
+                            TitleEn = "Title Text "
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Content = "Our forms do a lot of heavy lifting so you don't have to.Create LeadsNew submissions create a lead and add a note with all the form values.",
+                            ContentEn = "Our forms do a lot of heavy lifting so you don't have to.Create LeadsNew submissions create a lead and add a note with all the form values.",
+                            SectionId = 3,
+                            Title = "description Text ",
+                            TitleEn = "Title Text "
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Content = "Customers love using 99inbound for their forms",
+                            ContentEn = "Customers love using 99inbound for their forms",
+                            SectionId = 4,
+                            Title = "Title Text ",
+                            TitleEn = "Title Text "
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Content = "The seamless nature of the service has saved my team a ton of time manually inserting lead data into our CRM and the quick notifications means our response time has dramatically decreased. This has directly resulted in more sales and productivity.",
+                            SectionId = 4,
+                            Title = "description Text ",
+                            TitleEn = "Title Text "
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Content = "Our Location",
+                            ContentEn = "Our Location",
+                            SectionId = 5,
+                            Title = "Title Text ",
+                            TitleEn = "Title Text "
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Content = "",
+                            ContentEn = "",
+                            SectionId = 5,
+                            Title = "Description Text ",
+                            TitleEn = "Description Text "
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Content = "Meet Our Investors",
+                            ContentEn = "Meet Our Investors",
+                            SectionId = 6,
+                            Title = "Title Text ",
+                            TitleEn = "Title Text "
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Content = "",
+                            ContentEn = "",
+                            SectionId = 6,
+                            Title = "Description Text ",
+                            TitleEn = "Description Text "
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Content = "Solutions for Ships Tracking",
+                            ContentEn = "Solutions for Ships Tracking",
+                            SectionId = 7,
+                            Title = "Text ",
+                            TitleEn = "Text "
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Content = "Copyright © 2021. All rights reserved ",
+                            ContentEn = "Copyright © 2021. All rights reserved",
+                            SectionId = 7,
+                            Title = "Text ",
+                            TitleEn = "Text "
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

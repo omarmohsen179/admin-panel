@@ -1,4 +1,4 @@
 {
-  "ErpApiBaseUrl": "https://localhost:44318/",
-  "ApiBaseUrl": "https://localhost:44318/"
+  "ErpApiBaseUrl": "https://localhost:5001/",
+  "ApiBaseUrl": "https://localhost:5001/"
 }

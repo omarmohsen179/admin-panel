@@ -79,3 +79,16 @@ export const MEMBER_DELETE = async (id) => {
     url: "Member/" + id,
   });
 };
+export const SECTION_PAGE = async (page) => {
+  return await REQUEST({
+    method: "get",
+    url: "Section/" + page,
+  });
+};
+export const SECTION_UPDATE = async (e) => {
+  return await REQUEST({
+    method: "put",
+    url: "Section",
+    data: e,
+  });
+};

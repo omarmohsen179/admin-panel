@@ -2,6 +2,7 @@
 using AdminPanelApi.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,29 +25,27 @@ namespace AdminPanelApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var objlist = this.unitOfWork.BranchManager.Get(e => e.Active == true);
+            var objlist = this.unitOfWork.BranchManager.Get(e => e.Active == true,includeProperties:"Numbers");
             if (objlist != null)
             {
-                return Ok(objlist);
+                string JSONresult = JsonConvert.SerializeObject(objlist);
+                return Ok(JSONresult);
             }
             else
             {
                 return Ok();
             }
         }
-        [HttpGet("/")]
-        public IActionResult Getxx()
-        {
-            return Ok("done ");
-            
-        }
+
         [HttpGet("admin")]
         public IActionResult Getuser()
         {
-            var objlist = this.unitOfWork.BranchManager.GetAll();
+            var objlist = this.unitOfWork.BranchManager.Get( includeProperties: "Numbers");
             if (objlist != null)
+
             {
-                return Ok(objlist);
+                string JSONresult = JsonConvert.SerializeObject(objlist);
+                return Ok(JSONresult);
             }
             else
             {
@@ -60,12 +59,29 @@ namespace AdminPanelApi.Controllers
             try
             {
 
-                var numbers = this.unitOfWork.NumberManager.AddList(Temp.Numbers);
+                var numbers = Temp.Numbers;//this.unitOfWork.NumberManager.AddList(Temp.Numbers);
+                Temp.Numbers = null;
+
                 var Object = this.unitOfWork.BranchManager.Add(Temp);
                 if (Object.Id > 0)
                 {
-                    //      string JSONresult = JsonConvert.SerializeObject(member);
-                    return Ok(Object);
+                    if (numbers.Count() > 0) {
+                        foreach (var ele in numbers)
+                        {
+                            ele.Id = 0;
+                            ele.BranchId = Object.Id;
+                        }
+                        numbers = this.unitOfWork.NumberManager.AddList(numbers);
+                        if (numbers == null)
+                        {
+                            return BadRequest();
+                        }
+                        Object.Numbers = numbers;
+                    }
+
+                  
+                    string JSONresult = JsonConvert.SerializeObject(Object);
+                    return Ok(JSONresult);
                 }
                 else
                 {
@@ -83,23 +99,31 @@ namespace AdminPanelApi.Controllers
         {
             try
             {
-              
-                if (Temp.Numbers.Where(e => e.Id <= 0).Count() > 0)
+                var NewObjects = Temp.Numbers.Where(e => e.Id <= 0).ToList();
+                var OldObjects = Temp.Numbers.Where(e => e.Id > 0).ToList();
+                var myList = new List<Number>();
+             
+                if (NewObjects.Count() > 0)
                 {
-                    var add = this.unitOfWork.NumberManager.AddList(Temp.Numbers.Where(e => e.Id <= 0)).ToList();
-                    Temp.Numbers = add;
-                    Temp.Numbers.ToList().AddRange(Temp.Numbers.Where(e => e.Id > 0));
+                    foreach (var ele in NewObjects) {
+                          ele.Id = 0;
+                        ele.BranchId = Temp.Id;
+                    }
+                    var add = this.unitOfWork.NumberManager.AddList(NewObjects);    
+                    NewObjects = add.ToList();
                 }
-              
-
-                var Update = this.unitOfWork.NumberManager.UpdateList(Temp.Numbers);
-           
-              
+                myList.AddRange(OldObjects.ToList());
+                myList.AddRange(NewObjects.ToList());
+               
+                var Update = this.unitOfWork.NumberManager.UpdateList(myList);
+                var numbers = myList;
+                Temp.Numbers = null;
                 var Object = this.unitOfWork.BranchManager.Update(Temp);
                 if (Object)
                 {
-                    //      string JSONresult = JsonConvert.SerializeObject(Temp);
-                    return Ok(Temp);
+                    Temp.Numbers = numbers;
+                     string JSONresult = JsonConvert.SerializeObject(Temp);
+                    return Ok(JSONresult);
                 }
                 else
                 {
@@ -119,6 +143,28 @@ namespace AdminPanelApi.Controllers
             try
             {
                 var Object = this.unitOfWork.BranchManager.RemoveById(id);
+                if (Object)
+                {
+                    return Ok(200);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+        [HttpDelete("number/{id}")]
+
+        public IActionResult DeleteNumber(int id)
+        {
+
+            try
+            {
+                var Object = this.unitOfWork.NumberManager.RemoveById(id);
                 if (Object)
                 {
                     return Ok(200);

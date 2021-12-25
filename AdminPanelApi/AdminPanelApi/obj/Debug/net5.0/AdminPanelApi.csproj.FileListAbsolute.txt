@@ -220,3 +220,5 @@ D:\omar\ADMIN\AdminPanel\AdminPanelApi\AdminPanelApi\obj\Debug\net5.0\AdminPanel
 D:\omar\ADMIN\AdminPanel\AdminPanelApi\AdminPanelApi\obj\Debug\net5.0\ref\AdminPanelApi.dll
 D:\omar\ADMIN\AdminPanel\AdminPanelApi\AdminPanelApi\obj\Debug\net5.0\AdminPanelApi.pdb
 D:\omar\ADMIN\AdminPanel\AdminPanelApi\AdminPanelApi\obj\Debug\net5.0\AdminPanelApi.genruntimeconfig.cache
+D:\omar\ADMIN\AdminPanel\AdminPanelApi\AdminPanelApi\bin\Debug\net5.0\Twilio.dll
+D:\omar\ADMIN\AdminPanel\AdminPanelApi\AdminPanelApi\bin\Debug\net5.0\WhatsAppApi.dll

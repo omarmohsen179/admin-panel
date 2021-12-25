@@ -9,10 +9,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using WhatsAppApi;
 
 namespace AdminPanelApi.Controllers
 {
@@ -56,6 +62,27 @@ namespace AdminPanelApi.Controllers
             //};
 
             return Ok(result);
+        }
+        [HttpGet("whatsapp")]
+        public async Task<IActionResult> SendWhatsApp()
+        {
+            try
+            {
+                var data = new Dictionary<string, string>()
+        {
+            {"phone","+201006695562"},
+            { "body", "hi thier " }
+        };
+                return Ok(await SendRequest("sendMessage", JsonConvert.SerializeObject(data)));
+  
+            }
+            catch (Exception ex) { 
+            return Ok(ex.Message);
+            }
+
+
+
+           
         }
         [HttpPost("register-admin")]
         public async Task<IActionResult> RegisterAsyncAdmin([FromBody] RegisterModel model)
@@ -102,6 +129,20 @@ namespace AdminPanelApi.Controllers
         {
            
             return Ok(200);
+        }
+
+        [HttpGet("check-ddtype")]
+        public async Task<string> SendRequest(string method, string data)
+        {
+            string url = $"https://api.chat-api.com/instance389933/sendMessage?token=f80iimxtf7p5zvoj";
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(url);
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
+                var result = await client.PostAsync("", content);
+                return await result.Content.ReadAsStringAsync();
+            }
         }
     }
 }

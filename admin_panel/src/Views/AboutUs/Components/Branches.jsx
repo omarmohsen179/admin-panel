@@ -34,23 +34,26 @@ function Branches() {
       })
       .catch(() => {});
   }, []);
-  const OnDelete = useCallback(async (id) => {
-    if (id <= 0) {
-      notify("Error in information. select Again! ");
-      return;
-    }
-    await BRANCHES_DELETE(id)
-      .then(() => {
-        let x = data.filter(function (el) {
-          return el.Id !== id;
+  const OnDelete = useCallback(
+    async (id) => {
+      if (id <= 0) {
+        notify("Error in information. select Again! ");
+        return;
+      }
+      await BRANCHES_DELETE(id)
+        .then(() => {
+          let x = data.filter(function (el) {
+            return el.Id !== id;
+          });
+          setdata(x);
+          notify("Deleted successfuly", "success", 3000);
+        })
+        .catch(() => {
+          notify("Error in information. try again! ", "error", 3000);
         });
-        setdata(x);
-        notify("Deleted successfuly", "success", 3000);
-      })
-      .catch(() => {
-        notify("Error in information. try again! ", "error", 3000);
-      });
-  }, []);
+    },
+    [data]
+  );
 
   let objectKeysToLowerCase = function (input) {
     if (typeof input !== "object") return input;
@@ -67,6 +70,7 @@ function Branches() {
   };
   const OnSubmit = useCallback(
     async (id) => {
+      console.log();
       if (popup.data.Id == 0) {
         await BRANCHES_INSERT(popup.data)
           .then((res) => {
@@ -113,18 +117,12 @@ function Branches() {
             <div key={index} className="Home-steps-card">
               <div
                 onClick={() => setpopup({ data: res, status: !popup.status })}
-                className="  number-circle"
-              >
-                <div className="step-circle">
-                  <p> {index + 1}</p>
-                </div>
-              </div>
-              <div
-                onClick={() => setpopup({ data: res, status: !popup.status })}
                 className="col"
               >
-                <div className="step-card-title">{res.Title}</div>
-                <div>{res.Description}</div>
+                <div className="step-card-title">
+                  {res.CountryEn + ", " + res.CityEn}
+                </div>
+                <div>{res.AddressEn}</div>
               </div>
               <div
                 className="delete-icon-crud"

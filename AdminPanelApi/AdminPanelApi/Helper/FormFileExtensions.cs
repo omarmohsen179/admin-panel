@@ -22,6 +22,8 @@ namespace AdminPanelApi.Helpers
                         postedFile.ContentType.ToLower() != "image/jpeg" &&
                         postedFile.ContentType.ToLower() != "image/pjpeg" &&
                         postedFile.ContentType.ToLower() != "image/svg" &&
+
+                        postedFile.ContentType.ToLower() != "image/svg+xml" &&
                         postedFile.ContentType.ToLower() != "image/gif" &&
                         postedFile.ContentType.ToLower() != "image/x-png" &&
                         postedFile.ContentType.ToLower() != "image/png")
@@ -33,6 +35,7 @@ namespace AdminPanelApi.Helpers
             //  Check the image extension
             //-------------------------------------------
             if (Path.GetExtension(postedFile.FileName).ToLower() != ".jpg"
+                && Path.GetExtension(postedFile.FileName).ToLower() != ".svg"
                 && Path.GetExtension(postedFile.FileName).ToLower() != ".png"
                 && Path.GetExtension(postedFile.FileName).ToLower() != ".gif"
                 && Path.GetExtension(postedFile.FileName).ToLower() != ".jpeg")
@@ -43,32 +46,49 @@ namespace AdminPanelApi.Helpers
             //-------------------------------------------
             //  Attempt to read the file and check the first bytes
             //-------------------------------------------
-            try
-            {
-                if (!postedFile.OpenReadStream().CanRead)
-                {
-                    return false;
-                }
-                //------------------------------------------
-                //check whether the image size exceeding the limit or not
-                //------------------------------------------ 
-           /*     if (postedFile.Length < ImageMinimumBytes)
-                {
-                    return false;
-                }*/
 
-                byte[] buffer = new byte[ImageMinimumBytes];
-                postedFile.OpenReadStream().Read(buffer, 0, ImageMinimumBytes);
-                string content = System.Text.Encoding.UTF8.GetString(buffer);
-                if (Regex.IsMatch(content, @"<script|<html|<head|<title|<body|<pre|<table|<a\s+href|<img|<plaintext|<cross\-domain\-policy",
-                    RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Multiline))
+            if (Path.GetExtension(postedFile.FileName).ToLower() != ".svg") {
+                try
+                {
+                    if (!postedFile.OpenReadStream().CanRead)
+                    {
+                        return false;
+                    }
+                    //------------------------------------------
+                    //check whether the image size exceeding the limit or not
+                    //------------------------------------------ 
+                    /*     if (postedFile.Length < ImageMinimumBytes)
+                         {
+                             return false;
+                         }*/
+
+                    byte[] buffer = new byte[ImageMinimumBytes];
+                    postedFile.OpenReadStream().Read(buffer, 0, ImageMinimumBytes);
+                    string content = System.Text.Encoding.UTF8.GetString(buffer);
+                    /*if (Regex.IsMatch(content, @"<script|<html|<head|<title|<body|<pre|<table|<a\s+href|<img|<plaintext|<cross\-domain\-policy",
+                        RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Multiline))
+                    {
+                        return false;
+                    }*/
+                }
+                catch (Exception)
                 {
                     return false;
                 }
-            }
-            catch (Exception)
-            {
-                return false;
+                try
+                {
+                    using (var bitmap = new Bitmap(postedFile.OpenReadStream()))
+                    {
+                    }
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                finally
+                {
+                    postedFile.OpenReadStream().Position = 0;
+                }
             }
 
             //-------------------------------------------
@@ -76,20 +96,7 @@ namespace AdminPanelApi.Helpers
             //  we can assume that it's not a valid image
             //-------------------------------------------
 
-            try
-            {
-                using (var bitmap = new Bitmap(postedFile.OpenReadStream()))
-                {
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            finally
-            {
-                postedFile.OpenReadStream().Position = 0;
-            }
+
 
             return true;
         }

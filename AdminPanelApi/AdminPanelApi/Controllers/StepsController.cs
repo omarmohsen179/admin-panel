@@ -65,7 +65,6 @@ namespace AdminPanelApi.Controllers
                 var Object = this.unitOfWork.StepsManager.Add(Temp);
                 if (Object.Id > 0)
                 {
-                    
                     string JSONresult = JsonConvert.SerializeObject(Object);
                     return Ok(JSONresult);
                 }
