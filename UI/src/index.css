@@ -1,0 +1,8 @@
+body {
+  font-family: "Ubuntu", sans-serif !important;
+}
+.label-shared-style {
+  font-weight: 700;
+  font-size: 14px;
+  color: rgb(115 116 116);
+}
